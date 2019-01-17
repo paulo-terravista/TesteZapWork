@@ -1,0 +1,67 @@
+<div class='header'>Cadastro de Cliente</div>
+<div class="alert alert-success" role="alert" *ngIf="mostrarSucesso">
+    Dados salvos com sucesso!
+    <button class="btn btn-success btn-sm pull-right" popover="Fechar Mensagem"
+      (click)="closeMensagem()">
+        X
+    </button>
+</div>
+<div class="alert alert-danger" role="alert"  *ngIf="mostrarErro">
+  Houve um problema no momento da gravação dos dados!
+  <button class="btn btn-success btn-sm pull-right" popover="Fechar Mensagem"
+          (click)="closeMensagem()">X</button>
+</div>
+<form [formGroup]="clienteForm">
+  <div class="form-group required">
+    <label for="txNomeCliente" class="control-label">Nome do Cliente:</label>
+    <input type="text" id="txNomeCliente" class="form-control" required maxlength="30" placeholder="Entre com o nome do cliente"
+           formControlName="txNomeCliente"/>
+    <div *ngIf="txNomeCliente.errors?.required && mostrarMensagem" class="invalid">
+        O preenchimento do campo Nome do Cliente é obrigatório!
+    </div>
+  </div>
+  <div class="form-group required">
+    <label for="nmLimiteCredito" class="control-label">Limite de Crédito:</label>
+    <input type="number" id="nmLimiteCredito" class="form-control" required maxlength="5" placeholder="Entre com o limite de crédito"
+           formControlName="nmLimiteCredito"/>
+    <div *ngIf="nmLimiteCredito.errors?.required && mostrarMensagem" class="invalid">
+        O preenchimento do campo Limite de Crédito é obrigatório e tem de ser um número válido!
+    </div>
+  </div>
+  <div class="form-group required">
+    <label for="slRisco" class="control-label">Risco:</label>
+    <select id="slRisco" class="form-control" formControlName="slRisco">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select>
+    <div *ngIf="slRisco.errors?.required && mostrarMensagem" class="invalid">
+      A seleção do Risco é obrigatória!
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary"
+          popover="Clique aqui para salvar o formulário."
+          (click)='save()'>
+    Salvar
+  </button>
+</form>
+<br>
+<div class='sub-header'>Dados já salvos</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col" style="text-align: right">Limite de Crédido</th>
+      <th scope="col">Risco</th>
+      <th scope="col" style="text-align: right">Taxa de Juro</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of listCliente">
+      <td>{{ cliente.nome }}</td>
+      <td style="text-align: right">{{ cliente.limiteCredito | currency:'BRL':true }}</td>
+      <td>{{ cliente.risco }}</td>
+      <td style="text-align: right">{{ cliente.taxaJuro }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
+  }
+
+  .invalid {
+      color: red;
+      font-size: 12px;
+  }
+
+  .header {
+    color:orange; 
+    border-bottom: 1px solid orange; 
+    margin-bottom: 15px
+  }
+
+  .sub-header{
+    color:gray; 
+    border-bottom: 1px solid gray; 
+    margin-bottom: 8px
+  }
